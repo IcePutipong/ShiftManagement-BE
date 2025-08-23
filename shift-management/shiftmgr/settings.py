@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 import os
 from dotenv import load_dotenv
@@ -42,14 +43,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "rest_framework",
     "users",
-    "django_extensions"
+    "django_extensions",
+    "rest_framework_simplejwt.token_blacklist"
 ]
 
-RESTFRAMEWORK = {
+REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simpilejwt.authentication.JWTAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framworks.permission.IsAuthenticated",),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "BLACKLIST_AFTER_ROTATION": True,
+    "ROTATE_REFRESH_TOKENS": True,
 }
 
 MIDDLEWARE = [
