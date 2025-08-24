@@ -38,7 +38,7 @@ class UserTokenObtainPairSerializer(TokenObtainPairSerializer):
         return data
     
 class LoginUserView(TokenObtainPairView):
-    serializer_class = TokenObtainPairSerializer
+    serializer_class =  UserTokenObtainPairSerializer
 
 class LogoutUserView(APIView):
     permission_classes= [permissions.IsAuthenticated]
