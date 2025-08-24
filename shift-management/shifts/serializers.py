@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Shift, ShiftAssignment
 from django.contrib.auth import get_user_model
+from users.serializers import MeSerializer
 
 User = get_user_model()
 
@@ -19,7 +20,7 @@ class ShiftAssignmentSerializer(serializers.ModelSerializer):
         fields = ["id", "user", "shift"]
 
 class ShiftAssignmentDetailSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField()
+    user =  MeSerializer(read_only=True)
     shift = ShiftSerializer()
 
     class Meta:
